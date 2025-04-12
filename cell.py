@@ -29,21 +29,42 @@ class Cell():
                 Point(top_left.x, bottom_right.y),
                 
             ), "black")
+        else:
+            self._win.draw_line(Line(
+                Point(top_left.x, top_left.y),
+                Point(top_left.x, bottom_right.y),
+                
+            ), "white")
         if self.has_right_wall:
             self._win.draw_line(Line(
                 Point(bottom_right.x, top_left.y),
                 Point(bottom_right.x, bottom_right.y)
             ), "black")
+        else:
+            self._win.draw_line(Line(
+                Point(bottom_right.x, top_left.y),
+                Point(bottom_right.x, bottom_right.y)
+            ), "white")
         if self.has_top_wall:
             self._win.draw_line(Line(
                 Point(top_left.x, top_left.y),
                 Point(bottom_right.x, top_left.y)
             ), "black")
+        else:
+            self._win.draw_line(Line(
+                Point(top_left.x, top_left.y),
+                Point(bottom_right.x, top_left.y)
+            ), "white")
         if self.has_bottom_wall:
             self._win.draw_line(Line(
                 Point(top_left.x, bottom_right.y),
                 Point(bottom_right.x, bottom_right.y)
             ), "black")
+        else:
+            self._win.draw_line(Line(
+                Point(top_left.x, bottom_right.y),
+                Point(bottom_right.x, bottom_right.y)
+            ), "white")
 
     def draw_move(self, to_cell, undo=False):
         start = Point(
