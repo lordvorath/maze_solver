@@ -13,6 +13,8 @@ class Cell():
         self._y1 = y1
         self._y2 = y2
         self._win = win
+        self.visited = False
+
         self.top_left = Point(self._x1, self._y1)
         self.bottom_right = Point(self._x2, self._y2)
 
@@ -27,13 +29,11 @@ class Cell():
             self._win.draw_line(Line(
                 Point(top_left.x, top_left.y),
                 Point(top_left.x, bottom_right.y),
-                
             ), "black")
         else:
             self._win.draw_line(Line(
                 Point(top_left.x, top_left.y),
                 Point(top_left.x, bottom_right.y),
-                
             ), "white")
         if self.has_right_wall:
             self._win.draw_line(Line(
@@ -65,6 +65,12 @@ class Cell():
                 Point(top_left.x, bottom_right.y),
                 Point(bottom_right.x, bottom_right.y)
             ), "white")
+        
+        """ if self.visited:
+            self._win.draw_line(Line(
+                Point(self._x1 + 10, self._y1 + 10),
+                Point(self._x2 - 10, self._y2 - 10)
+            ), "red") """
 
     def draw_move(self, to_cell, undo=False):
         start = Point(

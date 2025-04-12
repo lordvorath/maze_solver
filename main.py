@@ -3,21 +3,16 @@ from cell import Cell
 from maze import Maze
 
 def main():
-    win = Window(800, 600)
-    
-    """ cell_size = 50
-    cells:list[Cell] = []
-    for x in range(1, 800, cell_size):
-        for y in range(1, 600, cell_size):
-            new_cell = Cell(x,y, x + cell_size, y + cell_size, win)
-            cells.append(new_cell)
-    for cell in cells:
-        cell.draw()
-    cells[0].draw_move(cells[1])
-    cells[20].draw_move(cells[30], True)
-    print(len(cells)) """
-    
-    maze = Maze(10, 10, 5, 5, 100, 50, win)
+    num_rows = 12
+    num_cols = 16
+    margin = 50
+    screen_x = 800
+    screen_y = 600
+    cell_size_x = (screen_x - 2 * margin) / num_cols
+    cell_size_y = (screen_y - 2 * margin) / num_rows
+    win = Window(screen_x, screen_y)
+
+    maze = Maze(margin, margin, num_rows, num_cols, cell_size_x, cell_size_y, win, 12)
 
     win.wait_for_close()
 
