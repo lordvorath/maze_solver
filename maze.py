@@ -29,6 +29,7 @@ class Maze():
         self._create_cells()
         self._break_entrance_and_exit()
         self._break_walls_r(0, 0)
+        self._reset_cells_visited()
 
     def _create_cells(self):
         self._cells:list[list[Cell]] = []
@@ -106,3 +107,39 @@ class Maze():
                 self._cells[new_x][new_y].has_bottom_wall = False
             self._break_walls_r(new_x, new_y)
             
+    def _reset_cells_visited(self):
+        for i in range(self._num_cols):
+            for j in range(self._num_rows):
+                self._cells[i][j].visited = False
+
+    def solve(self):
+        return self._solve_r(0, 0)
+    
+    def _solve_r(self, i:int, j:int):
+        self._animate()
+        self._cells[i][j].visited = True
+        if (i == self._num_cols -1) and (j == self._num_rows -1):
+            return True
+        directions = [(0, -1), (1, 0), (0, 1), (-1, 0)]
+        for dir in directions:
+            new_x = i + dir[0]
+            new_y = j + dir[1]
+            visitable = False
+            if new_x >= 0 and new_y >= 0 and new_x < self._num_cols and new_y < self._num_rows:
+                dest = self._cells[new_x][new_y]
+                if not dest.visited:
+                    if new_y < j and not dest.has_bottom_wall:
+                        visitable = True
+                    if new_y > j and not dest.has_top_wall:
+                        visitable = True
+                    if new_x < i and not dest.has_right_wall:
+                        visitable = True
+                    if new_x > i and not dest.has_left_wall:
+                        visitable = True
+            if visitable:
+                self._cells[i][j].draw_move(dest)
+                is_solved = self._solve_r(new_x, new_y)
+                if is_solved:
+                    return True
+                self._cells[i][j].draw_move(dest, True)
+        return False
