@@ -3,7 +3,7 @@ from line import Line
 from window import Window
 
 class Cell():
-    def __init__(self, x1, y1, x2, y2, win:Window):
+    def __init__(self, x1, y1, x2, y2, win:Window|None=None):
         self.has_left_wall = True
         self.has_right_wall = True
         self.has_top_wall = True

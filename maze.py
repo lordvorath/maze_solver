@@ -10,8 +10,10 @@ class Maze():
         num_cols,
         cell_size_x,
         cell_size_y,
-        win,
+        win=None,
     ):
+        if num_cols <= 0 or num_rows <= 0:
+            raise ValueError("ERROR: num_rows and num_cols must be positive integers")
         self._x1 = x1
         self._y1 = y1
         self._num_rows = num_rows
@@ -47,5 +49,7 @@ class Maze():
         self._animate()
 
     def _animate(self):
+        if self._win is None:
+            return
         self._win.redraw()
         sleep(0.05)
