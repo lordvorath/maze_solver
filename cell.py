@@ -17,6 +17,8 @@ class Cell():
         self.bottom_right = Point(self._x2, self._y2)
 
     def draw(self, top_left = None, bottom_right = None):
+        if self._win is None:
+            return
         if top_left is None:
             top_left = self.top_left
         if bottom_right is None:
